@@ -1,0 +1,93 @@
+version: '3'
+
+services:
+
+  traefik:
+      image: traefik:1.7.6-alpine
+      restart: always
+      ports:
+        - 80:80
+        - 443:443
+      networks:
+        - web
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - $PWD/traefik.toml:/traefik.toml
+        - $PWD/acme.json:/acme.json
+      labels:
+        - "traefik.frontend.auth.basic=$ADMIN_USER:$HASHED_PASSWORD"
+        - "traefik.docker.network=web"
+        - traefik.frontend.rule=Host:traefik.eaa.itb
+        - traefik.port=8080
+  
+  monit:
+    image: pottava/docker-webui
+    expose:
+      - "9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - web
+    labels: # Creem els nivells necessaris per traefik
+      - "traefik.backend=monitor"
+      - "traefik.frontend.rule=Host:monitor.eaa.itb"
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.port=9000"
+      - "traefik.default.protocol=http"
+      - "traefik.frontend.auth.basic=$ADMIN_USER:$HASHED_PASSWORD"
+
+  ftpd_server:
+    container_name: pure-ftpd
+    build:
+      context: $PWD/FTP/
+      dockerfile: Dockerfile
+    #image: stilliard/pure-ftpd
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    volumes:
+      - "./web22/modificacions:/data/ftpd"
+    restart: on-failure
+    environment:
+      PUBLICHOST: 0.0.0.0
+      FTP_USER_NAME: $ADMIN_USER
+      FTP_USER_PASS: $ADMIN_PASSWORD 
+      FTP_USER_HOME: /data/ftpd/
+  
+
+  www:
+    image: nginx
+    restart: always
+    volumes:
+      - $PWD/web11:/usr/share/nginx/html:ro
+    labels:
+      - traefik.backend=web11
+      - traefik.frontend.rule=Host:web11.eaa.itb
+      - traefik.docker.network=web
+      - traefik.port=80 
+    networks:
+      - internal
+      - web 
+  www2:
+    image: nginx
+    restart: always
+    volumes:
+      - $PWD/web22:/usr/share/nginx/html:ro
+    labels:
+      - traefik.backend=web22
+      - traefik.frontend.rule=Host:web22.eaa.itb
+      - traefik.docker.network=web
+      - traefik.port=80
+    networks:
+      - internal
+      - web
+
+networks:
+  web:
+    external: true
+  internal:
+    external: false
+volumes:
+  portainer_data: {}
+  database:
