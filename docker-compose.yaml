@@ -3,7 +3,7 @@ version: '3'
 services:
 
   traefik:
-      image: traefik:1.7.6-alpine
+      image: traefik:1.7
       restart: always
       ports:
         - 80:80
@@ -39,10 +39,10 @@ services:
 
   ftpd_server:
     container_name: pure-ftpd
-    build:
-      context: $PWD/FTP/
-      dockerfile: Dockerfile
-    #image: stilliard/pure-ftpd
+    #build:
+     # context: $PWD/FTP/
+     # dockerfile: Dockerfile
+    image: stilliard/pure-ftpd
     ports:
       - "21:21"
       - "30000-30009:30000-30009"
@@ -53,7 +53,7 @@ services:
       PUBLICHOST: 0.0.0.0
       FTP_USER_NAME: $ADMIN_USER
       FTP_USER_PASS: $ADMIN_PASSWORD 
-      FTP_USER_HOME: /data/ftpd/
+      FTP_USER_HOME: /data/ftpd
   
 
   www:
