@@ -35,7 +35,7 @@ services:
       - "traefik.enable=true"
       - "traefik.port=9000"
       - "traefik.default.protocol=http"
-      - "traefik.frontend.auth.basic=$ADMIN_USER:$HASHED_PASSWORD"
+      - "traefik.frontend.auth.basic=$ADMIN_USER:$ADMIN_PASSWORD"
 
   ftpd_server:
     container_name: pure-ftpd
