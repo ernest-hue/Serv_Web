@@ -15,7 +15,7 @@ services:
         - $PWD/traefik.toml:/traefik.toml
         - $PWD/acme.json:/acme.json
       labels:
-        - "traefik.frontend.auth.basic=$ADMIN_USER:$HASHED_PASSWORD"
+        - "traefik.frontend.auth.basic=profe:$$2y$$05$$mOTJ0eItIAdzsp7lUDnWaetnJlPNUp9VB55mYC3rw0goHmbQK67lS"
         - "traefik.docker.network=web"
         - traefik.frontend.rule=Host:traefik.eaa.itb
         - traefik.port=8080
@@ -35,7 +35,7 @@ services:
       - "traefik.enable=true"
       - "traefik.port=9000"
       - "traefik.default.protocol=http"
-      - "traefik.frontend.auth.basic=$ADMIN_USER:$ADMIN_PASSWORD"
+      - "traefik.frontend.auth.basic=profe:$$2y$$05$$mOTJ0eItIAdzsp7lUDnWaetnJlPNUp9VB55mYC3rw0goHmbQK67lS"
 
   ftpd_server:
     container_name: pure-ftpd
