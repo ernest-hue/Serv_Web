@@ -25,4 +25,4 @@ echo -e "[*]  Creant la infraestuctura..."
 docker-compose build
 # Aixecant la infraestuctura
 echo -e "[*]  Aixecant la infraestuctura..."
-docker-compose up -d 
+docker-compose up -d
