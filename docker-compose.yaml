@@ -73,7 +73,7 @@ services:
     image: nginx
     restart: always
     volumes:
-      - $PWD/web22:/usr/share/nginx/html:ro
+      - $PWD/web22/modificacions:/usr/share/nginx/html:ro
     labels:
       - traefik.backend=web22
       - traefik.frontend.rule=Host:web22.eaa.itb
