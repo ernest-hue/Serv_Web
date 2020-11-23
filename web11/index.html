@@ -9,6 +9,8 @@
 		@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 			p.console{font-family: 'Roboto Mono', monospace;}
 			h2.console{font-family: 'Roboto Mono', monospace;}
+			h3.console{font-family: 'Roboto Mono', monospace;}			
+			h4.console{font-family: 'Roboto Mono', monospace;}
 			header.terminal{background:#E0E8F0;height:30px;border-radius:8px 8px 0 0;padding-left:10px;}
 			.terminal-container header .button{width:12px;height:12px;margin:10px 4px 0 0;display:inline-block;border-radius:8px;}.green{background-color: #3BB662 !important;}.red{background-color: #E75448 !important;}
 			.yellow{background-color: #E5C30F !important;}
@@ -26,13 +28,27 @@
 <body>
 	<div class="terminal-home">					
     <div id="inf_personal">
-		<h2 class="console">PERSONAL INFORMATION</h2>
-		<p class="console"><b>Name & Surnames:</b> Ernest Anguera Aixalà</p>
-		<p class="console"><b>Age:</b> 19</p>
-		<p class="console"><b>Studying:</b> ASIXc</p> 
+		<h2 class="console">INFORMACIÓ PERSONAL</h2>
+		<p class="console"><b>Nom i cognoms:</b> Ernest Anguera Aixalà</p>
+		<p class="console"><b>Edat:</b> 19</p>
+		<p class="console"><b>Estudiant:</b> ASIXc</p> 
 	</div>
-    <div id="links">
+	<div id="inf_serv">
+		<h3 class="console">CARACTERÍSTIQUES DEL SERVIDOR</h3>
+		<h4 class="console">SERVIDORS WEB (web11 i web22):</h4>
+		<p class="console">Per a fer les web11 i web22 he utilitzat els contenidors de nginx per a crear el web i traefik per a afegir els certificats ssl.</p>
+		<h4 class="console">SERVIDOR FTP:</h4>
+		<p class="console">Per a crear el servei de FTP he utilitzat una imatge de docker que es diu stilliard/pure-ftpd.</p>
+		<h4 class="console">MONITORITZACIÓ DELS SERVEIS:</h4>
+		<p class="console">Per a poder monitoritzar els serveis, tinc dos imatges: Docker-web-ui i la web-ui de Traefik, tots dos protegits amb usuari i contrasenya</p>
+	</div>    
+	<div id="links">
 		<h2 class="console">LINKS A LES WEBS</h2>
+		<p class="console">--------------------------------</p>
+		<h4 class="console">USUARI I CONTRASENYA</h4>
+		<p class="console"><b>Usuari:</b> profe</p>
+		<p class="console"><b>Contrasenya:</b> chequejant</p>
+		<p class="console">--------------------------------</p>		
 		<p class="console">Web22&nbsp;-&nbsp; <a href="https://web22.eaa.itb">Instruccions</a><br></p>
 		<p class="console">Monitorització&nbsp;-&nbsp;<a href="https://monitor.eaa.itb">Rendiment dels serveis</a><br></p>
 		<p class="console">FTP&nbsp;-&nbsp;<a href="ftp://ftp.eaa.itb">Veure els fitxers pujats al servidor FTP</a><br></p>
