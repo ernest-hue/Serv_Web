@@ -79,6 +79,7 @@ services:
       - traefik.frontend.rule=Host:web22.eaa.itb
       - traefik.docker.network=web
       - traefik.port=80
+      - "traefik.frontend.auth.basic=profe:$$2y$$05$$mOTJ0eItIAdzsp7lUDnWaetnJlPNUp9VB55mYC3rw0goHmbQK67lS"
     networks:
       - internal
       - web
